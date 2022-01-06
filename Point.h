@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include <algorithm>
+#include <cmath>
 
 template<class TC>
 class Point  {
@@ -66,17 +67,17 @@ namespace xyz {
     template<class T>
     struct createPoint {
         Point<T> operator()() {
-            T x = -10 + rand() % 20;
-            T y = -10 + rand() % 20;
+            T x = -500 + rand() % 1000;
+            T y = -500 + rand() % 1000;
             Point<T> p(x, y);
             return p;
         };
     };
 }
 
-template<class T>
-std::vector<Point<T>> generate_points(int N) {
-    std::vector<Point<T>> v(N);
+template<class Container, class T>
+Container generate_points(int N) {
+    Container v(N);
     srand(time(0));
     xyz::createPoint<T> t;
     std::generate(v.begin(), v.end(), t);

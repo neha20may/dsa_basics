@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Shuffle.dir/objects.a
-"C:\PROGRA~1\JetBrains\CLion 2021.3.2\bin\mingw\bin\ar.exe" qc CMakeFiles\Shuffle.dir/objects.a @CMakeFiles\Shuffle.dir\objects1.rsp
-"C:\PROGRA~1\JetBrains\CLion 2021.3.2\bin\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\Shuffle.dir/objects.a -Wl,--no-whole-archive -o Shuffle.exe -Wl,--out-implib,libShuffle.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Shuffle.dir\linklibs.rsp

@@ -7,44 +7,39 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
-#include <set>
-#include "pbPlots.hpp"
-#include "supportLib.hpp"
 #include "convexhull_helper.h"
+
 
 using namespace std;
 
-template<class T, class I>
-I find_y_min(T &v);
 
 template<class T, class It>
 It nextCandidate(It current, T &points, T &convex_hull);
 
+template<class It>
+bool colinear_distance(It current, It min, It i);
+
 int main() {
     typedef Point<double> point_type;
-    typedef vector<point_type> vecType;
-    typedef vecType::iterator it;
+    typedef vector<point_type> setType;
+    typedef setType::iterator it;
 //    string file = "C:\\Users\\neha2\\CLionProjects\\Coursera_Part1\\wrong_ex.txt";
 //    auto points = read_points_from_file<point_type>(file.c_str());
-    auto points = generate_points<double>(10);
+    auto points = generate_points<setType, double>(10);
     cout << "points given are" << endl;
     copy(points.begin(), points.end(), ostream_iterator<Point<double>>(cout, " "));
     cout << endl;
-    vector<double> x;
-    vector<double> y;
-    for (auto p: points) {
-        x.push_back(p.getX());
-        y.push_back(p.getY());
-    }
+    vector<double> x, y;
+    getXY<double>(points, x, y);
     plotPoints(x, y, string("points.png").c_str());
-    auto p_0 = find_y_min<vecType, it>(points);
+    auto p_0 = find_y_min<setType, it>(points);
     cout << "initial point " << *p_0;
     auto start = p_0;
-    vecType convex_hull;
+    setType convex_hull;
     convex_hull.push_back(*start);
-    auto nextCan = nextCandidate<vecType, it>(start, points, convex_hull);
+    auto nextCan = nextCandidate<setType, it>(start, points, convex_hull);
     while (!(*nextCan == *start)) {
-        nextCan = nextCandidate<vecType, it>(nextCan, points, convex_hull);
+        nextCan = nextCandidate<setType, it>(nextCan, points, convex_hull);
     }
 //    convex_hull.pop_back();
     cout << "convex hull is " << endl;
@@ -61,48 +56,40 @@ int main() {
 
 template<class T, class It>
 It nextCandidate(It current, T &points, T &convex_hull) {
-    cout << "current reference is " << *current;
+//    cout << "current reference is " << *current;
     auto min = current;
-    set<Point<double>> colinear;
-    for (auto i = points.begin(); i < points.end(); i++) {
+    vector<Point<double>> colinear;
+    for (auto i = points.begin(); i != points.end(); i++) {
         if (*current == *i)
             continue;
         double cross_product = (*i - *current) * (*min - *current);
-        if (cross_product > 0.0)
+        if (cross_product > 0.0) {
             min = i;
-        else if (cross_product == 0) {
-            if (!(*min == *current)) {
-                colinear.insert(*i);
+            colinear.clear();
+        } else if (cross_product == 0) {
+            ///colinear points should be sorted according to their distance from the current point.
+            //while going up, you take the nearest point as the next point, while going down, you take the
+            if (colinear_distance(*current, *min, *i)) {
+                //min is closure to current so shift min to far but add that before to colinear.
+                if (!(*min == *current))
+                    colinear.push_back(*min);
+                min = i;
+            } else {
+                //min is already far
+                colinear.push_back(*i);
             }
-            auto d_min = distance(*min, *current);
-            auto d_i = distance(*i, *current);
-            min = (d_min < d_i) ? i : min;
         }
     }
-    cout << "Co-linear points are" <<
-         endl;
-    for (auto i: colinear)
-        cout << i;
-    cout << endl;
-//    auto cit=colinear.rbegin();
-//    colinear.erase(*min);
-//if(colinear.size()>1)
-//    copy(colinear.rbegin(), colinear.rend(), back_inserter(convex_hull));
-//else
+//    cout << "Co-linear points are" << endl;
+    unique(colinear.begin(), colinear.end());
+//    for (auto i: colinear)
+//        cout << i;
+    copy(colinear.begin(), colinear.end(), back_inserter(convex_hull));
     convex_hull.push_back(*min);
     return min;
 }
 
-template<class T, class I>
-I find_y_min(T &v) {
-    auto min = v.begin();
-    for (auto j = v.begin(); j < v.end(); j++) {
-        if (j->getY() < min->getY()) {
-            min = j;
-        } else if (j->getY() == min->getY()) {
-            min = (j->getX() > min->getX()) ? j : min;
-        }
-    }
-    return min;
-}
+
+
+
 

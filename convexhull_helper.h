@@ -8,8 +8,43 @@
 #include <vector>
 #include "Point.h"
 #include <fstream>
+#include "pbPlots.hpp"
+#include "supportLib.hpp"
+#include "convexhull_helper.h"
 
 using namespace std;
+
+template<class P>
+bool colinear_distance(P current, P min, P i) {
+    auto d1 = distance(current, min);
+    auto d2 = distance(current, i);
+    if (d1 < d2)
+        return true;
+    else
+        return false;
+}
+
+template<class T>
+void getXY(vector<Point<T>> &points, vector<T> &x, vector<T> &y) {
+    for (auto p: points) {
+        x.push_back(p.getX());
+        y.push_back(p.getY());
+    }
+
+}
+
+template<class T, class I>
+I find_y_min(T &v) {
+    auto min = v.begin();
+    for (auto j = v.begin(); j != v.end(); j++) {
+        if (j->getY() < min->getY()) {
+            min = j;
+        } else if (j->getY() == min->getY()) {
+            min = (j->getX() > min->getX()) ? j : min;
+        }
+    }
+    return min;
+}
 
 template<class T>
 std::vector<T> read_points_from_file(const char *file_name) {
@@ -49,10 +84,10 @@ void plotPoints(vector<T> &x, vector<T> &y, const char *file_name) {
     settings1->height = 400;
     settings1->autoBoundaries = false;
     settings1->autoPadding = true;
-    settings1->xMax = 20;
-    settings1->yMax = 20;
-    settings1->xMin = -20;
-    settings1->yMin = -20;
+    settings1->xMax = 700;
+    settings1->yMax = 700;
+    settings1->xMin = -700;
+    settings1->yMin = -700;
     settings1->scatterPlotSeries->push_back(series);
     DrawScatterPlotFromSettings(imageRef, settings1, (StringReference *) "error");
     vector<double> *pngdata1 = ConvertToPNG(imageRef->image);
@@ -69,6 +104,7 @@ void plotLine(vector<T> &ox, vector<T> &oy, vector<T> &x, vector<T> &y, const ch
     series->linearInterpolation = false;
     series->pointType = toVector(L"circles");
     series->color = CreateRGBColor(1, 0, 0);
+
     ScatterPlotSeries *series2 = GetDefaultScatterPlotSeriesSettings();
     series2->xs = &x;
     series2->ys = &y;
@@ -89,10 +125,10 @@ void plotLine(vector<T> &ox, vector<T> &oy, vector<T> &x, vector<T> &y, const ch
     settings->height = 1000;
     settings->autoBoundaries = false;
     settings->autoPadding = true;
-    settings->xMax = 20;
-    settings->yMax = 20;
-    settings->xMin = -20;
-    settings->yMin = -20;
+    settings->xMax = 700;
+    settings->yMax = 700;
+    settings->xMin = -700;
+    settings->yMin = -700;
     settings->scatterPlotSeries->push_back(series);
     settings->scatterPlotSeries->push_back(series2);
     settings->scatterPlotSeries->push_back(series3);
