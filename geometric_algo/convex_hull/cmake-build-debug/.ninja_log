@@ -1,0 +1,9 @@
+# ninja log v5
+21	605	6690763406091263	CMakeFiles/Graham_scan.dir/C_/Users/neha2/CLionProjects/Coursera_Part1/plotting/supportLib.cpp.obj	dc84bd7f25a7e04
+1	2118	6690763421191226	CMakeFiles/Graham_scan.dir/Graham_scan.cpp.obj	a84e5cafa7df067b
+21	586	6690763556345993	CMakeFiles/JarvisMarch.dir/C_/Users/neha2/CLionProjects/Coursera_Part1/plotting/supportLib.cpp.obj	d04693590e10b9e9
+0	960	6690763560076025	CMakeFiles/JarvisMarch.dir/JarvisMarch.cpp.obj	9563badfe4bebeb8
+4	1959	6690767390838313	CMakeFiles/JarvisMarch.dir/C_/Users/neha2/CLionProjects/Coursera_Part1/plotting/pbPlots.cpp.obj	39c334e48cda5b85
+1959	2344	6690767394686307	JarvisMarch.exe	5a260c0ac776e05e
+5	1884	6690767765043745	CMakeFiles/Graham_scan.dir/C_/Users/neha2/CLionProjects/Coursera_Part1/plotting/pbPlots.cpp.obj	655240eb318a44e9
+1885	2284	6690767769033736	Graham_scan.exe	1eaba76449b546f0

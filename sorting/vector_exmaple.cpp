@@ -23,8 +23,8 @@ vector<int> v_ex() {
     //Note: you cant print low directly, there is no concept of printing iterator dorectly.
     cout << "low is " << low - a.begin()
          << " high is " << high - a.begin() << "mid is " << mid - a.begin() << endl;
-    //    auto mid=a.begin()+(a.begin()+a.end())/2;
-    //Note , the addition of vector is not supported here. Iterator arithmatic is a whole different topic.
+    //    auto mid=seg1.begin()+(seg1.begin()+seg1.end())/2;
+    //Note , the addition of vector is not supported here. Iterator arithmatic is seg1 whole different topic.
 //    cout<<low;
     return a;
 

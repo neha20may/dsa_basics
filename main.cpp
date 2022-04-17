@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <ctime>
-#include "quickSorting.h"
+#include "sorting/quickSorting.h"
 #include <iterator>
 //#include "matplotlibcpp.h"
 

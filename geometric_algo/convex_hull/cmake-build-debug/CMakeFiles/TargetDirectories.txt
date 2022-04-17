@@ -1,0 +1,4 @@
+C:/Users/neha2/CLionProjects/Coursera_Part1/geometric_algo/convex_hull/cmake-build-debug/CMakeFiles/JarvisMarch.dir
+C:/Users/neha2/CLionProjects/Coursera_Part1/geometric_algo/convex_hull/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/neha2/CLionProjects/Coursera_Part1/geometric_algo/convex_hull/cmake-build-debug/CMakeFiles/Graham_scan.dir
+C:/Users/neha2/CLionProjects/Coursera_Part1/geometric_algo/convex_hull/cmake-build-debug/CMakeFiles/edit_cache.dir

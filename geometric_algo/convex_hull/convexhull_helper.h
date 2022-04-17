@@ -8,8 +8,8 @@
 #include <vector>
 #include "Point.h"
 #include <fstream>
-#include "pbPlots.hpp"
-#include "supportLib.hpp"
+#include "../../plotting/pbPlots.hpp"
+#include "../../plotting/supportLib.hpp"
 #include "convexhull_helper.h"
 
 using namespace std;
@@ -61,7 +61,7 @@ std::vector<T> read_points_from_file(const char *file_name) {
             //  NOTE: while(input){ then reading input>>x>>y ; reads last line twice bcz it treats EOF as healthy line so the last value of x and y gets carried over!
             cout << "x=" << xx << " y=" << yy << endl;
             Point<double> p(xx, yy);
-            //Question why this point being a local variable gets stored in vector? Copy by value, Honey!
+            //Question why this point being seg1 local variable gets stored in vector? Copy by value, Honey!
             v.push_back(p);
         }
     else
@@ -109,7 +109,7 @@ void plotLine(vector<T> &ox, vector<T> &oy, vector<T> &x, vector<T> &y, const ch
     series2->xs = &x;
     series2->ys = &y;
     series2->linearInterpolation = true;
-    series2->lineType = toVector(L"dashed");
+    series2->lineType = toVector(L"solid");
     series2->lineThickness = 2;
     series2->color = CreateRGBColor(0, 0, 0.2);
 
@@ -125,10 +125,10 @@ void plotLine(vector<T> &ox, vector<T> &oy, vector<T> &x, vector<T> &y, const ch
     settings->height = 1000;
     settings->autoBoundaries = false;
     settings->autoPadding = true;
-    settings->xMax = 700;
-    settings->yMax = 700;
-    settings->xMin = -700;
-    settings->yMin = -700;
+    settings->xMax = 20;
+    settings->yMax = 20;
+    settings->xMin = -20;
+    settings->yMin = -20;
     settings->scatterPlotSeries->push_back(series);
     settings->scatterPlotSeries->push_back(series2);
     settings->scatterPlotSeries->push_back(series3);
